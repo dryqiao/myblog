@@ -1,12 +1,18 @@
-let express=require('express'),
-    app=express();
+let path=require('path'),
+    express=require('express'),
+    app=express(),
+    indexRouter=require('./routes/index'),
+    userRouter=require('./routes/users')
+    ;
+//存放模板文件
+app.set('views',path.join(__dirname,'views'));
+//模板引擎为ejs
+app.set('view engine','ejs');
 
-app.get('/',(req,res)=>{
-    res.send('hello,express');
-});
+app.use('/',indexRouter);
+app.use('/users',userRouter);
+//占位符，获取路由信息并打印
 
-app.get('/users/:name',(req,res)=>{
-    res.send('hello,'+req.params.name);
-});
+
 
 app.listen(4000);
