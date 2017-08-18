@@ -1,8 +1,8 @@
 let path=require('path'),
     express=require('express'),
     app=express(),
-    indexRouter=require('./routes/index'),
-    userRouter=require('./routes/users')
+    indexRouter=require('./routes/index')
+    // userRouter=require('./routes/users')
     ;
 //存放模板文件
 app.set('views',path.join(__dirname,'views'));
