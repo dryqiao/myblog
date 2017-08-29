@@ -4,7 +4,7 @@ let express=require('express'),
 
 //GET/posts
 router.get('/',(req,res,next)=>{
-    res.send(req.flash());
+    res.render('posts');
 });
 
 //发表一篇文章
