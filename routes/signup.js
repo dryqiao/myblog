@@ -8,10 +8,10 @@ let fs=require('fs'),
     checkNotLogin = require('../middlewares/check').checkNotLogin;
 
 router.get('/',checkNotLogin,(req,res,next)=>{
-res.render('signup');
+  res.render('signup'); 
 });
 
-router.post('/',checkNotLogin,(res,req,next)=>{
+router.post('/',checkNotLogin,(req,res,next)=>{
     var name = req.fields.name;
     var gender = req.fields.gender;
     var bio = req.fields.bio;
