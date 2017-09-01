@@ -1,16 +1,15 @@
-//博客入口
-let path = require('path'),
-    express = require('express'),
-    session = require('express-session'),
-    MongoStore = require('connect-mongo')(session),
-    flash = require('connect-flash'),
-    config = require('config-lite')(__dirname),
-    routes = require('./routes'),
-    pkg = require('./package'),
-    winston = require('winston'),
-    expressWinston = require('express-winston'),
+var path = require('path');
+var express = require('express');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
+var config = require('config-lite')(__dirname);
+var routes = require('./routes');
+var pkg = require('./package');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 
-    app = express();
+var app = express();
 
 // 设置模板目录
 app.set('views', path.join(__dirname, 'views'));
@@ -34,7 +33,7 @@ app.use(session({
 }));
 // flash 中间件，用来显示通知
 app.use(flash());
-
+// 处理表单及文件上传的中间件
 app.use(require('express-formidable')({
   uploadDir: path.join(__dirname, 'public/img'),// 上传文件目录
   keepExtensions: true// 保留后缀
@@ -80,16 +79,14 @@ app.use(expressWinston.errorLogger({
     })
   ]
 }));
+
 // error page
-app.use( (err, req, res, next)=> {
+app.use(function (err, req, res, next) {
   res.render('error', {
     error: err
   });
 });
-// 监听端口，启动程序
-app.listen(config.port, function () {
-  console.log(`${pkg.name} listening on port ${config.port}`);
-});
+
 if (module.parent) {
   module.exports = app;
 } else {
